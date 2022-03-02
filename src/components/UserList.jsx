@@ -23,7 +23,7 @@ const UserList = () => {
     api.userDisplayer({ setUserList });
   }, []);
 
-  return (<div>
+  return (<div className="title-page">
      <h1>Table of users</h1>
      <Table striped bordered hover variant="dark">
   <thead>
