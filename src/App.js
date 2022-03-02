@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import './App.css';
+import React from 'react';
+import { Routes, Route, Outlet } from 'react-router-dom';
+import CreateUser from './components/CreateUser';
+import Login from './components/Login';
+import UserList from './components/UserList';
+import NonConnected from './components/NonConnected';
+import RequireAuth from './utils/RequireAuth';
 
-function App() {
-  return (
+const App = () => (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route exact path="/" element={<Outlet />}>
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/createuser" element={<CreateUser />} />
+          <Route exact path="/*" element={<NonConnected />} />
+          <Route element={<RequireAuth />}>
+            <Route exact path="/userlist" element={<UserList />} />
+          </Route>
+        </Route>
+      </Routes>
     </div>
-  );
-}
+);
 
 export default App;
