@@ -3,10 +3,11 @@
 /* eslint-disable no-multiple-empty-lines */
 /* eslint-disable no-trailing-spaces */
 import React, { useState, useEffect } from 'react';
-import { Button, Col } from 'react-bootstrap';
+import {
+  Button, Form, Row, Container, Col,
+} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import useAuth from '../contexts/useAuth';
 import api from '../utils/api';
 
@@ -35,41 +36,36 @@ const Login = () => {
   return (
     <div className="App">
 
-      <h1>Login</h1>
-      <div className="email-page">
-        <form autoComplete="off">
-          <p className="form-group">
-            <input
-              modifier="material"
-              placeholder="email"
-              onChange={(event) => setEmail(event.target.value)}
-              value={email}
-            />
-          </p>
+     
+      <Container>
+        <Row md="auto" className="justify-content-md-center">
+        <Col className='form'>
+        <h2 className='title-page'>Login</h2>
+        <Form>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" placeholder="Enter email" onChange={(event) => setEmail(event.target.value)}
+              value={email}/>
+          <Form.Text className="text-muted">
+            We ll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
 
-          <p className="form-group">
-            <input
-              modifier="material"
-              placeholder="Password"
-              type="password"
-              onChange={(event) => setPassword(event.target.value)}
-              value={password}
-            />
-          </p>
-
-            <Button as={Col} md="auto" xs="auto" onClick={login} >
-              Login
-            </Button>
-            <Link to="/createuser">
-            <span>
-                Create user
-            </span>
-            </Link>
-
-        </form>
-
-      </div>
-
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)}
+              value={password}/>
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={login}>
+          Login
+        </Button>
+        <Link to="/createuser">
+            <span>Want to create an account ? Click here !</span>
+          </Link>
+      </Form>
+      </Col>
+      </Row>
+      </Container>
     </div>
   );
 };
